@@ -1,5 +1,5 @@
 import { useState, useMemo, useCallback } from 'react';
-import { Search, Star, Clock, LayoutGrid, Shield } from 'lucide-react';
+import { Search, Star, Clock, LayoutGrid, Shield, Home } from 'lucide-react';
 import { toolkitRaw, normalizeToolkit, ToolCategory } from './data/tools';
 import { CategorySection } from './components/CategorySection';
 import { useFavorites } from './hooks/useFavorites';
@@ -55,6 +55,20 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#020817] text-[#ecf7ff] font-sans">
       <div className="max-w-[1320px] mx-auto px-4 sm:px-6 py-6">
+
+        {/* Home button */}
+        <div className="flex justify-end mb-3">
+          <a
+            href="https://prohacking77.me"
+            target="_blank"
+            rel="noreferrer"
+            title="Retour à l'accueil"
+            className="group flex items-center gap-2 bg-[#081426] border border-[#12304d] hover:border-cyan-400/50 hover:bg-cyan-400/8 text-[#86a6be] hover:text-cyan-300 rounded-xl px-3 py-2 transition-all duration-200"
+          >
+            <Home size={15} />
+            <span className="text-[0.78rem] font-medium">prohacking77.me</span>
+          </a>
+        </div>
 
         {/* Hero */}
         <div className="bg-gradient-to-b from-[#071321] to-[#06101f] border border-[#12304d] rounded-[24px] p-5 shadow-[0_18px_40px_rgba(0,0,0,0.28)] mb-7">
