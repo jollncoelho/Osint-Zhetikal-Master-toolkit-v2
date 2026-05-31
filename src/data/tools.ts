@@ -24,6 +24,8 @@ export const toolkitRaw: ToolCategory[] = [
       { name: "WiGLE", url: "https://wigle.net/", description: "Base données réseaux WiFi/GSM", tags: ["free"] },
       { name: "Bellingcat Phone Number Checker", url: "https://github.com/bellingcat/telegram-phone-number-checker", description: "Vérification de numéros liés à Telegram", tags: ["free", "cli"] },
       { name: "Ignorant", url: "https://github.com/megadose/ignorant", description: "Présence de numéros sur Snapchat / Instagram", tags: ["free", "cli"] },
+      { name: "EmobileTracker", url: "https://www.emobiletracker.com", description: "Recherche et identification d'informations sur des mobiles", tags: ["free"] },
+      { name: "Vedbex", url: "https://vedbex.com", description: "Outil de pivot pour lier un numéro de téléphone à un compte Skype", tags: ["free"] },
       { name: "That's Them", url: "https://thatsthem.com/", description: "Recherche personnes et téléphones", tags: ["free"] },
       { name: "ZabaSearch", url: "https://www.zabasearch.com/", description: "Recherche publique de personnes", tags: ["free"] }
     ]
@@ -39,6 +41,7 @@ export const toolkitRaw: ToolCategory[] = [
       { name: "EmailRep", url: "https://emailrep.io/", description: "Réputation d'une adresse email", tags: ["free"] },
       { name: "GHunt", url: "https://github.com/mxrch/GHunt", description: "Recherche sur comptes Google publics", tags: ["free", "cli"] },
       { name: "Mailcat", url: "https://github.com/sharsil/mailcat", description: "Trouver emails via pseudo", tags: ["free", "cli"] },
+      { name: "Sherlockeye", url: "https://sherlockeye.io", description: "Investigation d'adresses e-mail pour découvrir les comptes liés", tags: ["free"] },
       { name: "BreachDirectory", url: "https://breachdirectory.org/", description: "Recherche dans fuites", tags: ["free"] },
       { name: "ScamSearch", url: "https://scamsearch.io/", description: "Base de données arnaqueurs", tags: ["free"] },
       { name: "Skymem", url: "https://www.skymem.info/", description: "Trouver emails d'entreprises", tags: ["free"] },
@@ -46,7 +49,7 @@ export const toolkitRaw: ToolCategory[] = [
       { name: "SimpleLogin", url: "https://simplelogin.io/", description: "Masquer une adresse email", tags: ["free"] },
       { name: "Email-Format", url: "http://email-format.com/", description: "Formats emails d'entreprises", tags: ["free"] },
       { name: "Apollo", url: "https://www.apollo.io/", description: "Prospection contacts pro et emails", tags: ["free", "paid"] },
-      { name: "Snov.io", url: "https://snov.io/email-finder", description: "Recherche et vérification d'emails", tags: ["free", "paid"] },
+      { name: "Snov.io", url: "https://snov.io/email-finder", description: "Recherche et verification d'emails", tags: ["free", "paid"] },
       { name: "HaveIBeenZuckered", url: "https://www.haveibeenzuckered.com/", description: "Recherche dans fuites Facebook", tags: ["free"] }
     ]
   },
@@ -56,6 +59,8 @@ export const toolkitRaw: ToolCategory[] = [
       { name: "Sherlock", url: "https://github.com/sherlock-project/sherlock", description: "Recherche de pseudo multi-sites", tags: ["free", "cli"] },
       { name: "Maigret", url: "https://github.com/soxoj/maigret", description: "Découverte de comptes liés", tags: ["free", "cli"] },
       { name: "WhatsMyName", url: "https://whatsmyname.app/", description: "Vérifier présence d'un username", tags: ["free"] },
+      { name: "Blackbird", url: "https://github.com/p1ngul1n0/blackbird", description: "Traque et recherche de pseudonymes sur plus de 500 plateformes", tags: ["free", "cli"] },
+      { name: "osint.rocks", url: "https://osint.rocks/", description: "Interface et toolkit léger pour l'investigation de pseudos", tags: ["free"] },
       { name: "NameCheckup", url: "https://namecheckup.com/", description: "Recherche pseudo & disponibilité", tags: ["free"] },
       { name: "IDCrawl", url: "https://www.idcrawl.com/username", description: "Agrégation d'identité publique", tags: ["free"] },
       { name: "AnalyzeID", url: "https://analyzeid.com/", description: "Analyse de pseudonymes et identités", tags: ["free"] },
@@ -74,6 +79,8 @@ export const toolkitRaw: ToolCategory[] = [
       { name: "URLScan", url: "https://urlscan.io/", description: "Analyse d'URL et ressources", tags: ["free"] },
       { name: "Shodan", url: "https://www.shodan.io/", description: "Services exposés et bannières", tags: ["free", "paid"] },
       { name: "Censys", url: "https://search.censys.io/", description: "Recherche d'hôtes et certificats", tags: ["free"] },
+      { name: "dnstwist", url: "https://github.com/elceef/dnstwist", description: "Analyse et détection de domaines de phishing ou typosquatting", tags: ["free", "cli"] },
+      { name: "Subdomain Finder", url: "https://github.com/aboul3la/Sublist3r", description: "Recherche de sous-domaines via moteurs et sources publiques", tags: ["free", "cli"] },
       { name: "BuiltWith", url: "http://builtwith.com/", description: "Technologies utilisées par un site", tags: ["free"] },
       { name: "Robtex", url: "https://www.robtex.com/", description: "Vue DNS et réseau", tags: ["free"] },
       { name: "MXToolbox", url: "https://mxtoolbox.com/", description: "Diagnostics DNS, MX et email", tags: ["free"] },
@@ -85,7 +92,7 @@ export const toolkitRaw: ToolCategory[] = [
       { name: "SubdomainRadar", url: "https://subdomainradar.io/", description: "Découverte de sous-domaines", tags: ["free", "paid"] },
       { name: "FullHunt", url: "https://fullhunt.io/", description: "Découverte surface d'attaque", tags: ["free", "paid"] },
       { name: "BeVigil", url: "https://bevigil.com/search", description: "Assets mobiles, domaines et fuites", tags: ["free"] },
-      { name: "Netlas", url: "https://app.netlas.io/", description: "Indexation de services exposés", tags: ["free"] },
+      { name: "Netlas", url: "https://raw.netlas.io/", description: "Indexation de services exposés", tags: ["free"] },
       { name: "FOFA", url: "https://en.fofa.info/", description: "Moteur de recherche d'actifs Internet", tags: ["free", "paid"] },
       { name: "Criminal IP", url: "https://www.criminalip.io/", description: "Recherche d'IP et services", tags: ["free", "paid"] },
       { name: "Web Check", url: "https://web-check.as93.net/", description: "Analyse d'un site web complète", tags: ["free"] },
@@ -141,6 +148,7 @@ export const toolkitRaw: ToolCategory[] = [
       { name: "Google Hacking DB", url: "https://www.exploit-db.com/google-hacking-database", description: "Google dorks", tags: ["free"] },
       { name: "DorkGenius", url: "https://dorkgenius.com/", description: "Générateur de dorks", tags: ["free"] },
       { name: "DorkGPT", url: "https://www.dorkgpt.com/", description: "Aide IA pour dorks", tags: ["free"] },
+      { name: "Google Dorks for Bug Bounty", url: "https://github.com/sushil79/Google-Dorks-for-Bug-Bounty", description: "Compilation de dorks préconfigurés pour la recherche de failles", tags: ["free"] },
       { name: "Google Trends", url: "https://www.google.com/trends", description: "Tendances de recherche", tags: ["free"] },
       { name: "Google News", url: "https://news.google.com/", description: "Recherche d'actualité", tags: ["free"] },
       { name: "Scholar Google", url: "https://scholar.google.com/", description: "Recherche académique", tags: ["free"] },
@@ -188,6 +196,9 @@ export const toolkitRaw: ToolCategory[] = [
       { name: "Foller.me", url: "https://foller.me/", description: "Analyse compte X/Twitter", tags: ["free"] },
       { name: "InVID", url: "https://www.invid-project.eu/tools-and-services/invid-verification-plugin/", description: "Vérification vidéo & images", tags: ["free"] },
       { name: "Bellingcat Toolkit", url: "http://bit.ly/bcattools", description: "Outils de vérification", tags: ["free"] },
+      { name: "Instaloader", url: "https://github.com/instaloader/instaloader", description: "Outil CLI puissant pour extraire et sauvegarder les profils Instagram", tags: ["free", "cli"] },
+      { name: "LinkedIn Overlay Remover", url: "https://github.com/jfilter/linkedin-overlay-remover", description: "Script pour contourner le mur de connexion obligatoire de LinkedIn", tags: ["free", "cli"] },
+      { name: "Bellingcat Insta Location", url: "https://bellingcat.github.io/instagram-location-search/", description: "Interface de recherche de posts Instagram par zone géographique", tags: ["free"] },
       { name: "Twitter", url: "https://twitter.com/", description: "Plateforme X/Twitter", tags: ["free"] },
       { name: "Instagram", url: "https://www.instagram.com/", description: "Plateforme Instagram", tags: ["free"] },
       { name: "Facebook", url: "https://www.facebook.com/", description: "Plateforme Facebook", tags: ["free"] },
@@ -213,6 +224,10 @@ export const toolkitRaw: ToolCategory[] = [
       { name: "Google Earth", url: "https://earth.google.com/", description: "Vue satellite & 3D", tags: ["free"] },
       { name: "GeoHints", url: "https://geohints.com/", description: "Indices géolocalisation", tags: ["free"] },
       { name: "OpenStreetMap", url: "https://www.openstreetmap.org/", description: "Carte collaborative", tags: ["free"] },
+      { name: "Sentinel Hub Playground", url: "https://apps.sentinel-hub.com/sentinel-playground/", description: "Visualisation d'imageries satellites récentes sous divers spectres", tags: ["free"] },
+      { name: "GPSJam", url: "https://gpsjam.org/", description: "Analyse cartographique des interférences GPS globales en temps réel", tags: ["free"] },
+      { name: "MapChecking", url: "https://www.mapchecking.com/", description: "Estimation de la taille et densité d'une foule sur une zone fixe", tags: ["free"] },
+      { name: "Live Starlink Satellite Tracker", url: "https://findstarlink.com/", description: "Suivi visuel et cartographique de la constellation Starlink", tags: ["free"] },
       { name: "BatchGeo", url: "http://batchgeo.com/", description: "Cartographie de listes d'adresses", tags: ["free"] },
       { name: "Google Earth Explorer", url: "https://earthexplorer.usgs.gov/", description: "Imagerie satellite USGS", tags: ["free"] },
       { name: "Satellites.pro", url: "https://satellites.pro/", description: "Imagerie satellite et altitude", tags: ["free"] },
@@ -275,6 +290,8 @@ export const toolkitRaw: ToolCategory[] = [
       { name: "GitHub Advanced Search", url: "https://github.com/search/advanced", description: "Recherche GitHub avancée", tags: ["free"] },
       { name: "Grep.app", url: "https://grep.app/", description: "Recherche dans code open source", tags: ["free"] },
       { name: "SearchCode", url: "https://searchcode.com/", description: "Recherche d'extraits de code", tags: ["free"] },
+      { name: "grep.app", url: "https://grep.app", description: "Moteur d'indexation pour fouiller du texte au sein de dépôts publics", tags: ["free"] },
+      { name: "searchcode", url: "https://searchcode.com", description: "Analyse et recherche avancée de fonctions ou tokens dans le code source", tags: ["free"] },
       { name: "Sourcegraph", url: "https://sourcegraph.com/search", description: "Navigation de code universelle", tags: ["free"] },
       { name: "GitLab", url: "https://gitlab.com/explore", description: "Dépôts GitLab publics", tags: ["free"] },
       { name: "Gist", url: "https://gist.github.com/", description: "Snippets publics GitHub", tags: ["free"] },
@@ -282,7 +299,7 @@ export const toolkitRaw: ToolCategory[] = [
       { name: "Photon", url: "https://github.com/s0md3v/Photon", description: "Crawler web pour OSINT", tags: ["free", "cli"] },
       { name: "SpiderFoot", url: "https://github.com/smicallef/spiderfoot", description: "Automatisation OSINT", tags: ["free", "cli"] },
       { name: "theHarvester", url: "https://github.com/laramies/theHarvester", description: "Emails, sous-domaines et noms", tags: ["free", "cli"] },
-      { name: "Amass", url: "https://github.com/owasp-amass/amass", description: "Enumération infrastructure", tags: ["free", "cli"] },
+      { name: "Amass", url: "https://github.com/owasp-amass/amass", description: "Énumération infrastructure", tags: ["free", "cli"] },
       { name: "SpiderFoot site", url: "https://www.spiderfoot.net/", description: "Plateforme SpiderFoot", tags: ["free"] },
       { name: "Maltego", url: "https://www.maltego.com/", description: "Graphes et pivots d'enquête", tags: ["free", "paid"] },
       { name: "Graphystories", url: "http://app.graphystories.com/", description: "Visualisation de graphes", tags: ["free"] },
@@ -478,6 +495,7 @@ export const toolkitRaw: ToolCategory[] = [
       { name: "Hugging Face", url: "https://huggingface.co/", description: "Plateforme modèles IA", tags: ["free"] },
       { name: "Groq", url: "https://groq.com/", description: "Inference IA rapide", tags: ["free"] },
       { name: "Geospy", url: "https://geospy.ai/", description: "IA de géolocalisation d'image", tags: ["paid"] },
+      { name: "Geospy.ai", url: "https://geospy.ai", description: "Analyse prédictive de localisation géographique par IA", tags: ["free"] },
       { name: "AskNews", url: "https://asknews.app/", description: "Veille d'actualité par IA", tags: ["paid"] },
       { name: "MyMapAI", url: "https://www.mymap.ai/", description: "Cartes mentales et visualisation IA", tags: ["free"] },
       { name: "DuckDuckGo AI Chat", url: "https://duck.ai/", description: "Chat IA plus privé", tags: ["free"] },
@@ -568,6 +586,16 @@ export const toolkitRaw: ToolCategory[] = [
       { name: "AllTop", url: "http://alltop.com/", description: "Agrégateur d'actualités thématiques", tags: ["free"] },
       { name: "Flipboard", url: "http://flipboard.com/", description: "Agrégateur de contenus", tags: ["free"] },
       { name: "Digg Reader", url: "http://digg.com/login?next=%2Freader", description: "Lecture de flux et veille", tags: ["free"] }
+    ]
+  },
+  {
+    category: "Module Colombie",
+    items: [
+      { name: "SIPLAFT", url: "https://www.siplaft.com", description: "Analyse et vérification des risques de blanchiment d'argent", tags: ["free"] },
+      { name: "Superintendencia de Notariado y Registro", url: "https://www.supernotariado.gov.co", description: "Consultation officielle des registres de propriété immobilière", tags: ["free"] },
+      { name: "Censo nacional electoral", url: "https://www.registraduria.gov.co", description: "Vérification du registre électoral national des citoyens", tags: ["free"] },
+      { name: "RUES", url: "https://www.rues.org.co", description: "Registre Unique Empresarial pour la vérification légale des entreprises", tags: ["free"] },
+      { name: "RNEC", url: "https://www.registraduria.gov.co", description: "Vérification de l'état légal des cartes d'identité (Cédula) en ligne", tags: ["free"] }
     ]
   }
 ];
