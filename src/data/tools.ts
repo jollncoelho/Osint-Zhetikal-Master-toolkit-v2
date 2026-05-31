@@ -96,8 +96,6 @@ export const toolkitRaw: ToolCategory[] = [
       { name: "Validin", url: "https://app.validin.com/", description: "Intelligence DNS et pivots", tags: ["free", "paid"] },
       { name: "Whois ARIN", url: "https://whois.arin.net/", description: "WHOIS IP et opérateurs", tags: ["free"] },
       { name: "Radar Cloudflare", url: "https://radar.cloudflare.com/", description: "Tendances Internet et ASN", tags: ["free"] }
-      { name: "dnstwist", url: "https://github.com/elceef/dnstwist", description: "Détection de typosquatting et phishing de domaine", tags: ["free", "cli"] },
-      { name: "Subdomain Finder", url: "https://github.com/aboul3la/Sublist3r", description: "Énumération rapide de sous-domaines via sources publiques", tags: ["free", "cli"] },
     ]
   },
   {
@@ -206,9 +204,6 @@ export const toolkitRaw: ToolCategory[] = [
       { name: "Brandwatch", url: "https://www.brandwatch.com/", description: "Social listening", tags: ["paid"] },
       { name: "TwitterAudit", url: "https://www.twitteraudit.com/", description: "Audit audience X/Twitter", tags: ["free"] },
       { name: "AnalyzeID", url: "https://analyzeid.com/", description: "Analyse comptes sociaux", tags: ["free"] }
-      { name: "Instaloader", url: "https://github.com/instaloader/instaloader", description: "Scraper et télécharger médias et métadonnées Instagram", tags: ["free", "cli"] },
-      { name: "LinkedIn Overlay Remover", url: "https://github.com/jfilter/linkedin-overlay-remover", description: "Contournement du login wall obligatoire de LinkedIn", tags: ["free", "cli"] },
-      { name: "Bellingcat Insta Location", url: "https://bellingcat.github.io/instagram-location-search/", description: "Recherche de posts Instagram géolocalisés sur une zone", tags: ["free"] },
     ]
   },
   {
@@ -235,10 +230,6 @@ export const toolkitRaw: ToolCategory[] = [
       { name: "EarthExplorer USGS", url: "https://earthexplorer.usgs.gov/", description: "Archives satellites", tags: ["free"] },
       { name: "Inspire Geoportal", url: "http://inspire-geoportal.ec.europa.eu/", description: "Données géographiques UE", tags: ["free"] },
       { name: "Zeemaps", url: "https://www.zeemaps.com/", description: "Créer cartes personnalisées", tags: ["free"] }
-      { name: "Sentinel Hub Playground", url: "https://apps.sentinel-hub.com/sentinel-playground/", description: "Analyse d'imagerie satellite récente avec filtres de rendu", tags: ["free"] },
-      { name: "GPSJam", url: "https://gpsjam.org/", description: "Carte des interférences et brouillages GPS mondiaux en temps réel", tags: ["free"] },
-      { name: "MapChecking", url: "https://www.mapchecking.com/", description: "Estimation de la densité de foule sur une zone définie", tags: ["free"] },
-      { name: "Live Starlink Satellite Tracker", url: "https://findstarlink.com/", description: "Cartographie et suivi de la position des satellites Starlink", tags: ["free"] },
     ]
   },
   {
@@ -550,9 +541,6 @@ export const toolkitRaw: ToolCategory[] = [
       { name: "All-IO", url: "http://all-io.net/", description: "Recherche d'identité et données publiques", tags: ["free"] },
       { name: "PredictaSearch", url: "https://predictasearch.com/", description: "Recherche de personnes", tags: ["free"] },
       { name: "That's Them People Search", url: "https://thatsthem.com/", description: "Adresses, emails et téléphones publics", tags: ["free"] }
-      { name: "Blackbird", url: "https://github.com/p1ngul1n0/blackbird", description: "Recherche de pseudos sur plus de 500 sites", tags: ["free", "cli"] },
-      { name: "Black Widow", url: "https://github.com/1N3/BlackWidow", description: "Web-scanner et sniffing d'identifiants cibles", tags: ["free", "cli"] },
-      { name: "osint.rocks", url: "https://osint.rocks/", description: "Hub léger d'investigation d'identités numériques", tags: ["free"] },
     ]
   },
   {
