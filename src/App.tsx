@@ -56,9 +56,11 @@ export default function App() {
 
         const items = section.items.filter(item => {
           if (view === 'favorites' && !favorites.has(item.url)) return false;
-          if (onlyFree && !item.tags.includes('free')) return false;
+          if (onlyFree && !item.tags.some(t => t.toLowerCase() === 'free')) return false;
           if (activeTags.size > 0) {
-            const hasAll = [...activeTags].every(t => item.tags.includes(t as 'free' | 'paid' | 'cli'));
+            const hasAll = [...activeTags].every(t =>
+              item.tags.some(it => it.toLowerCase() === t.toLowerCase())
+            );
             if (!hasAll) return false;
           }
           if (!q) return true;
