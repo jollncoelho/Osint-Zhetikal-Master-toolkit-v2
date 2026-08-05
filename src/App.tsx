@@ -1,5 +1,5 @@
 import { useState, useMemo, useCallback } from 'react';
-import { Search, Star, LayoutGrid, Shield, Home, Shuffle, Github, FileJson, FileText } from 'lucide-react';
+import { Search, Star, LayoutGrid, Shield, Home, Shuffle, Github, FileJson, FileText, RotateCcw } from 'lucide-react';
 import { toolkitRaw, normalizeToolkit, ToolCategory, Tool } from './data/tools';
 import { CategorySection } from './components/CategorySection';
 import { RandomToolModal } from './components/RandomToolModal';
@@ -86,6 +86,15 @@ export default function App() {
   const switchView = useCallback((v: View) => {
     setView(v);
     if (v === 'favorites') setActiveCategory('Toutes');
+  }, []);
+
+  const hasActiveFilters = search.trim() !== '' || activeCategory !== 'Toutes' || activeTags.size > 0 || onlyFree;
+
+  const resetFilters = useCallback(() => {
+    setSearch('');
+    setActiveCategory('Toutes');
+    setActiveTags(new Set());
+    setOnlyFree(false);
   }, []);
 
   return (
@@ -255,8 +264,8 @@ export default function App() {
             </button>
           </div>
 
-          {/* Tag filters */}
-          <div className="flex flex-wrap gap-2 mt-3">
+          {/* Tag filters + reset */}
+          <div className="flex flex-wrap items-center gap-2 mt-3">
             {ALL_TAGS.map(tag => {
               const active = activeTags.has(tag);
               const s = TAG_STYLES[tag];
@@ -270,14 +279,21 @@ export default function App() {
                 </button>
               );
             })}
-            {activeTags.size > 0 && (
+            {hasActiveFilters && (
               <button
-                onClick={() => setActiveTags(new Set())}
-                className="px-3 py-1.5 rounded-full border border-[#12304d] text-[#86a6be] hover:text-white text-[0.74rem] font-semibold transition-all"
+                onClick={resetFilters}
+                className="flex items-center gap-1.5 ml-auto px-3 py-1.5 rounded-full border border-cyan-400/30 bg-cyan-400/8 text-cyan-300 hover:bg-cyan-400/15 hover:border-cyan-400/50 text-[0.74rem] font-semibold transition-all duration-150"
               >
-                Réinitialiser
+                <RotateCcw size={12} />
+                Réinitialiser les filtres
               </button>
             )}
+          </div>
+
+          {/* Dynamic result counter */}
+          <div className="mt-3 text-[#86a6be] text-[0.8rem] font-medium">
+            Affichage de <span className="text-cyan-300 font-bold">{visibleCount}</span> outil{visibleCount > 1 ? 's' : ''} sur <span className="text-[#d4eefb] font-bold">{TOTAL}</span> disponible{TOTAL > 1 ? 's' : ''}
+            {view === 'favorites' && favorites.size > 0 && ` · ${favorites.size} favori${favorites.size > 1 ? 's' : ''}`}
           </div>
 
           {/* Category filters */}

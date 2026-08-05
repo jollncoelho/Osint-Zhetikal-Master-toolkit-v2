@@ -1,5 +1,5 @@
 import { useState, memo } from 'react';
-import { Star, ExternalLink, Copy, Check } from 'lucide-react';
+import { Star, ExternalLink, Copy, Check, Terminal, Globe, Github } from 'lucide-react';
 import { Tool, getDomain } from '../data/tools';
 
 interface Props {
@@ -19,6 +19,9 @@ export const ToolCard = memo(function ToolCard({ tool, isFavorite, onToggleFavor
   const [imgError, setImgError] = useState(false);
   const domain = getDomain(tool.url);
   const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+  const isCLI = tool.tags.some(t => t.toLowerCase() === 'cli');
+  const isGitHub = tool.url.toLowerCase().includes('github.com');
+  const sourceLabel = isGitHub ? 'Dépôt GitHub / Script' : 'Outil Web direct';
 
   async function handleCopy(e: React.MouseEvent) {
     e.preventDefault();
@@ -80,12 +83,27 @@ export const ToolCard = memo(function ToolCard({ tool, isFavorite, onToggleFavor
             {tool.description}
           </p>
 
-          <div className="flex flex-wrap gap-1.5 mt-2.5">
+          <div className="flex flex-wrap items-center gap-1.5 mt-2.5">
             {tool.tags.map(tag => (
               <span key={tag} className={`text-[0.68rem] font-bold px-2 py-0.5 rounded-md ${TAG_STYLES[tag] ?? ''}`}>
                 {tag}
               </span>
             ))}
+            {isCLI && (
+              <span
+                title="Outil en ligne de commande / Nécessite un terminal"
+                className="flex items-center gap-1 text-[0.68rem] font-bold px-2 py-0.5 rounded-md bg-sky-500/10 text-sky-400 border border-sky-500/20 cursor-help"
+              >
+                <Terminal size={10} />
+                CLI
+              </span>
+            )}
+          </div>
+
+          {/* Source indicator */}
+          <div className="flex items-center gap-1.5 mt-2 text-[#6f90aa] text-[0.72rem] font-medium">
+            {isGitHub ? <Github size={11} className="text-[#a9c7dc]" /> : <Globe size={11} className="text-cyan-400/70" />}
+            <span className="truncate" title={sourceLabel}>{sourceLabel}</span>
           </div>
         </div>
       </div>
