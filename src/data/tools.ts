@@ -1,5 +1,14 @@
 export interface Tool { name: string; url: string; description: string; tags: ('free' | 'paid' | 'cli')[]; }
 export interface ToolCategory { category: string; items: Tool[]; }
+
+export function getDomain(url: string): string {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return url;
+  }
+}
+
 export const toolkitRaw: ToolCategory[] = [
   { category: "Réseaux sociaux", items: [
     { name: "All Twitch Streamers Search", url: "https://twitchstats.net/allstreamers", description: "No description", tags: ["free"] },
