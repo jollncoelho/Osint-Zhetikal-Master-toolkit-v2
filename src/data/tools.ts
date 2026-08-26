@@ -9,6 +9,16 @@ export function getDomain(url: string): string {
   }
 }
 
+export function normalizeToolkit(raw: ToolCategory[]): ToolCategory[] {
+  return raw.map(section => ({
+    ...section,
+    items: section.items.map(tool => ({
+      ...tool,
+      description: tool.description || 'Outil ' + tool.name,
+    }))
+  }));
+}
+
 export const toolkitRaw: ToolCategory[] = [
   { category: "Réseaux sociaux", items: [
     { name: "All Twitch Streamers Search", url: "https://twitchstats.net/allstreamers", description: "No description", tags: ["free"] },
