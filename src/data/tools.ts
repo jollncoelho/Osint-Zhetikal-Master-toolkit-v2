@@ -903,6 +903,7 @@ export const toolkitRaw: ToolCategory[] = [
     { name: "Pulsedive", url: "https://pulsedive.com", description: "Outil Pulsedive", tags: ["free"] },
     { name: "Search Datasets", url: "https://datahub.io/search", description: "No description", tags: ["free"] },
     { name: "Shodan", url: "https://www.shodan.io", description: "Outil Shodan", tags: ["free"] },
+    { name: "SpiderFoot", url: "https://spiderfoot.tools/", description: "Plateforme d'automatisation OSINT permettant d'auditer des cibles (adresses IP, domaines, emails, noms d'utilisateurs) et de cartographier la surface d'attaque en interrogeant plus de 200 sources de données.", tags: ["free", "cli"] },
     { name: "theZoo", url: "https://github.com/ytisf/theZoo", description: "No description", tags: ["free"] },
     { name: "THREAT MAP by LookingGlass", url: "https://map.lookingglasscyber.com", description: "No description", tags: ["free"] },
     { name: "Threatbutt", url: "https://threatbutt.com/map", description: "No description", tags: ["free"] },
