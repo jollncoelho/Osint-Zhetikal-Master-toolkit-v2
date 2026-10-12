@@ -76,13 +76,15 @@ Usernames · Documents & Data · Fact-check & Vérification
 ```
 ├── index.html                  # coquille HTML : SEO, Open Graph, JSON-LD, manifest
 ├── public/                     # fichiers servis tels quels
+│   ├── logo.svg                # logo (repris d'OSINT Investigator)
 │   ├── favicon.svg             # icône vectorielle
 │   ├── icon-192/512.png        # icônes PWA
 │   ├── apple-touch-icon.png
 │   ├── og-image.png            # image de partage social (1200×630)
 │   ├── site.webmanifest
 │   ├── robots.txt
-│   └── sitemap.xml
+│   ├── sitemap.xml
+│   └── _redirects              # règles SPA (Netlify)
 ├── scripts/
 │   ├── build-dataset.mjs       # génère src/data/toolkit.json depuis la source brute
 │   ├── generate-assets.py      # génère icônes + image de partage (Pillow)
@@ -169,13 +171,37 @@ modificateurs d'opacité de Tailwind (`bg-app-panel/70`, `border-app-accent/30`�
 
 ## 🌐 Déploiement
 
-Le build produit un site statique dans `dist/` (déployable sur Netlify, Vercel, GitHub Pages,
-Cloudflare Pages…). `dist/_redirects` est fourni pour les hébergeurs type Netlify (SPA).
+### Production
 
-Avant mise en ligne, mettez à jour le domaine de référence dans :
+Le site est en ligne sur **Vercel** :
 
-- `index.html` — `<link rel="canonical">`, `og:url`, `twitter:url`, JSON-LD
+**<https://ghostint.query-intel.com/>**
+
+Vercel est relié au dépôt GitHub et **redéploie automatiquement à chaque push sur `main`** :
+aucune action manuelle n'est nécessaire.
+
+> ℹ️ Le site est servi depuis la **racine** du domaine. `vite.config.ts` ne définit donc
+> **aucun `base`** — les assets sont référencés en `/assets/…`.
+>
+> ⚠️ Si le site devait un jour être servi depuis un **sous-chemin** (par exemple
+> `utilisateur.github.io/mon-depot/` sur GitHub Pages), il faudrait définir
+> `base: '/mon-depot/'` dans `vite.config.ts`, sinon tous les liens vers les assets
+> renverraient un 404.
+
+### Autres hébergeurs
+
+Le build produit un site statique dans `dist/`, déployable tel quel (Netlify, Cloudflare
+Pages, GitHub Pages…). `public/_redirects` est fourni pour les hébergeurs type Netlify.
+
+### Changer de domaine
+
+Si le domaine de référence change, mettez à jour l'URL dans :
+
+- `index.html` — `<link rel="canonical">`, `og:url`, `og:image`, `twitter:image`, JSON-LD
 - `public/sitemap.xml`, `public/robots.txt`
+
+Ces URLs doivent être **absolues** : Open Graph et les sitemaps n'acceptent pas de chemins
+relatifs.
 
 ---
 
