@@ -4,23 +4,129 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-  font-family: 'Inter', system-ui, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
+/* ==========================================================================
+   Jetons de thème (design tokens)
+   Les couleurs sont stockées sous forme de canaux RGB (« R G B ») afin que
+   Tailwind puisse leur appliquer un modificateur d'opacité
+   (ex. bg-app-panel/70, border-app-accent/30).
+   Le thème sombre est la valeur par défaut ; le thème clair surcharge les
+   mêmes variables via [data-theme='light'].
+   ========================================================================== */
+
+:root,
+[data-theme='dark'] {
+  --c-bg-rgb: 2 8 23;
+  --c-bg-soft-rgb: 6 16 31;
+  --c-panel-rgb: 8 20 38;
+  --c-panel-2-rgb: 10 25 48;
+  --c-border-rgb: 18 48 77;
+  --c-border-strong-rgb: 29 77 121;
+  --c-text-rgb: 236 247 255;
+  --c-text-muted-rgb: 169 199 220;
+  --c-text-dim-rgb: 124 156 180;
+  --c-accent-rgb: 34 211 238;
+  --c-accent-ink-rgb: 3 19 30;
+  --c-gold-rgb: 251 191 36;
+  --c-emerald-rgb: 52 211 153;
+  --c-orange-rgb: 251 146 60;
+  --c-sky-rgb: 56 189 248;
+  --c-violet-rgb: 167 139 250;
+
+  --c-accent-soft: rgba(34, 211, 238, 0.12);
+  --shadow-card: 0 14px 30px rgba(0, 0, 0, 0.32);
+  --shadow-pop: 0 24px 60px rgba(0, 0, 0, 0.55);
+  --glow: radial-gradient(circle at top right, rgba(34, 211, 238, 0.09), transparent 42%);
+  color-scheme: dark;
 }
 
+[data-theme='light'] {
+  --c-bg-rgb: 238 244 250;
+  --c-bg-soft-rgb: 255 255 255;
+  --c-panel-rgb: 255 255 255;
+  --c-panel-2-rgb: 242 247 252;
+  --c-border-rgb: 215 228 240;
+  --c-border-strong-rgb: 169 198 221;
+  --c-text-rgb: 10 33 49;
+  --c-text-muted-rgb: 60 92 116;
+  --c-text-dim-rgb: 86 116 141;
+  --c-accent-rgb: 14 139 168;
+  --c-accent-ink-rgb: 255 255 255;
+  --c-gold-rgb: 180 83 9;
+  --c-emerald-rgb: 4 120 87;
+  --c-orange-rgb: 194 65 12;
+  --c-sky-rgb: 3 105 161;
+  --c-violet-rgb: 109 40 217;
+
+  --c-accent-soft: rgba(14, 139, 168, 0.1);
+  --shadow-card: 0 10px 24px rgba(15, 45, 70, 0.09);
+  --shadow-pop: 0 24px 60px rgba(15, 45, 70, 0.18);
+  --glow: radial-gradient(circle at top right, rgba(14, 139, 168, 0.08), transparent 45%);
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+}
+
+html,
+body {
+  font-family: 'Inter', system-ui, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background-color: rgb(var(--c-bg-rgb));
+}
+
+body {
+  color: rgb(var(--c-text-rgb));
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* --------------------------------------------------------------------------
+   Accessibilité : anneau de focus visible et homogène partout
+   -------------------------------------------------------------------------- */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid rgb(var(--c-accent-rgb));
+  outline-offset: 2px;
+  border-radius: 0.5rem;
+}
+
+/* Lien d'évitement pour la navigation au clavier */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  background: rgb(var(--c-accent-rgb));
+  color: rgb(var(--c-accent-ink-rgb));
+  border-radius: 0 0 0.75rem 0;
+  font-weight: 700;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Barres de défilement
+   -------------------------------------------------------------------------- */
 .custom-scroll::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
+  width: 6px;
+  height: 6px;
 }
 .custom-scroll::-webkit-scrollbar-track {
   background: transparent;
 }
 .custom-scroll::-webkit-scrollbar-thumb {
-  background: #12304d;
-  border-radius: 4px;
+  background: rgb(var(--c-border-strong-rgb));
+  border-radius: 6px;
+}
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--c-accent-rgb));
 }
 
+/* --------------------------------------------------------------------------
+   Utilitaires
+   -------------------------------------------------------------------------- */
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -28,7 +134,29 @@ html, body {
   overflow: hidden;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Respecte les préférences de mouvement réduit */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Impression : masque les éléments d'interface inutiles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
 }

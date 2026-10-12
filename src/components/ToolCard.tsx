@@ -1,133 +1,168 @@
-import { useState, memo } from 'react';
-import { Star, ExternalLink, Copy, Check, Terminal, Globe, Github } from 'lucide-react';
-import { Tool, getDomain } from '../data/tools';
+import { memo, useState } from 'react';
+import { Star, ExternalLink, Copy, Check, Terminal, Globe, Github, Lock, FileCode, Search, Zap } from 'lucide-react';
+import { Tool, ToolKind, getDomain, getFaviconUrl, KIND_LABELS } from '../data/tools';
+import { copyText } from '../utils/exportFavorites';
+import { toast } from '../hooks/useToasts';
 
 interface Props {
   tool: Tool;
   isFavorite: boolean;
-  onToggleFavorite: (url: string) => void;
+  onToggleFavorite: (id: string) => void;
+  onOpen: (tool: Tool) => void;
 }
 
-const TAG_STYLES: Record<string, string> = {
-  free: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
-  paid: 'bg-orange-500/10 text-orange-400 border border-orange-500/20',
-  cli: 'bg-sky-500/10 text-sky-400 border border-sky-500/20',
+/** Icône associée au type de ressource. */
+const KIND_ICON: Record<ToolKind, typeof Globe> = {
+  web: Globe,
+  github: Github,
+  cse: Search,
+  tor: Lock,
+  docs: FileCode,
+  api: Zap,
+  startpage: Search,
 };
 
-export const ToolCard = memo(function ToolCard({ tool, isFavorite, onToggleFavorite }: Props) {
+const KIND_BADGE: Record<ToolKind, string> = {
+  web: 'text-app-sky border-app-sky/30 bg-app-sky/10',
+  github: 'text-app-violet border-app-violet/30 bg-app-violet/10',
+  cse: 'text-app-emerald border-app-emerald/30 bg-app-emerald/10',
+  tor: 'text-app-orange border-app-orange/30 bg-app-orange/10',
+  docs: 'text-app-muted border-app-border bg-app-panel2',
+  api: 'text-app-gold border-app-gold/30 bg-app-gold/10',
+  startpage: 'text-app-muted border-app-border bg-app-panel2',
+};
+
+export const ToolCard = memo(function ToolCard({ tool, isFavorite, onToggleFavorite, onOpen }: Props) {
   const [copied, setCopied] = useState(false);
   const [imgError, setImgError] = useState(false);
+
   const domain = getDomain(tool.url);
-  const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
-  const isCLI = tool.tags.some(t => t.toLowerCase() === 'cli');
-  const isGitHub = tool.url.toLowerCase().includes('github.com');
-  const sourceLabel = isGitHub ? 'Dépôt GitHub / Script' : 'Outil Web direct';
+  const isCLI = tool.tags.includes('cli');
+  const isPaid = tool.tags.includes('paid');
+  const KindIcon = KIND_ICON[tool.kind] ?? Globe;
 
-  async function handleCopy(e: React.MouseEvent) {
-    e.preventDefault();
-    e.stopPropagation();
-    try {
-      await navigator.clipboard.writeText(tool.url);
+  async function handleCopy() {
+    const ok = await copyText(tool.url);
+    if (ok) {
       setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
-    } catch {}
-  }
-
-  function handleFavorite(e: React.MouseEvent) {
-    e.preventDefault();
-    e.stopPropagation();
-    onToggleFavorite(tool.url);
+      toast('Lien copié dans le presse-papiers', 'success');
+      window.setTimeout(() => setCopied(false), 1500);
+    } else {
+      toast('Impossible de copier le lien', 'warning');
+    }
   }
 
   return (
-    <div className="group card-item relative flex flex-col bg-gradient-to-b from-[#06101f]/98 to-[#08182c]/98 border border-[#12304d] rounded-2xl p-4 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/60 hover:shadow-[0_16px_32px_rgba(0,0,0,0.35),0_0_0_1px_rgba(34,211,238,0.08)] overflow-hidden min-h-[180px]">
-      {/* Radial glow */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(34,211,238,0.08),transparent_40%)] group-hover:opacity-100 opacity-60 transition-opacity" />
+    <article className="group card-item relative flex flex-col rounded-2xl border border-app-border bg-gradient-to-b from-app-bgSoft to-app-panel p-4 min-h-[190px] transition-all duration-200 hover:-translate-y-1 hover:border-app-accent/60 hover:shadow-card">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 rounded-2xl opacity-60 transition-opacity group-hover:opacity-100"
+        style={{ background: 'var(--glow)' }}
+      />
 
-      {/* Favorite button */}
+      {/* Lien principal : toute la carte est cliquable */}
+      <a
+        href={tool.url}
+        target="_blank"
+        rel="noreferrer noopener"
+        aria-label={`Ouvrir ${tool.name} (nouvel onglet)`}
+        className="absolute inset-0 z-[1] rounded-2xl"
+        onClick={() => onOpen(tool)}
+      />
+
+      {/* Bouton favori */}
       <button
-        onClick={handleFavorite}
-        className={`absolute top-3 right-3 z-10 p-1.5 rounded-lg transition-all duration-150 ${
+        type="button"
+        onClick={() => onToggleFavorite(tool.id)}
+        className={`absolute right-3 top-3 z-20 rounded-lg p-1.5 transition-all duration-150 ${
           isFavorite
-            ? 'text-amber-400 bg-amber-400/10'
-            : 'text-[#86a6be] hover:text-amber-400 hover:bg-amber-400/10 opacity-0 group-hover:opacity-100'
+            ? 'bg-app-gold/15 text-app-gold'
+            : 'text-app-dim opacity-0 hover:bg-app-gold/15 hover:text-app-gold focus-visible:opacity-100 group-hover:opacity-100'
         }`}
-        aria-label={isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris'}
+        aria-pressed={isFavorite}
+        aria-label={isFavorite ? `Retirer ${tool.name} des favoris` : `Ajouter ${tool.name} aux favoris`}
+        title={isFavorite ? 'Retirer des favoris' : 'Ajouter aux favoris'}
       >
-        <Star size={14} fill={isFavorite ? 'currentColor' : 'none'} />
+        <Star size={15} fill={isFavorite ? 'currentColor' : 'none'} />
       </button>
 
-      <div className="relative z-10 flex gap-3 items-start flex-1">
+      <div className="relative z-[2] pointer-events-none flex flex-1 items-start gap-3">
         {/* Favicon */}
-        <div className="flex-shrink-0 mt-0.5 w-8 h-8 rounded-lg bg-[#0a1930] border border-[#12304d] overflow-hidden flex items-center justify-center">
+        <div className="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center overflow-hidden rounded-lg border border-app-border bg-app-panel2">
           {!imgError ? (
             <img
-              src={faviconUrl}
+              src={getFaviconUrl(tool.url, 64)}
               alt=""
               width={20}
               height={20}
               onError={() => setImgError(true)}
-              className="w-5 h-5 object-contain"
+              className="h-5 w-5 object-contain"
               loading="lazy"
+              decoding="async"
             />
           ) : (
-            <div className="w-2 h-2 rounded-full bg-cyan-400" />
+            <span className="text-[0.8rem] font-bold text-app-accent">{tool.name.slice(0, 1).toUpperCase()}</span>
           )}
         </div>
 
         <div className="min-w-0 flex-1">
-          <h3 className="text-[#ecf7ff] font-semibold text-[0.95rem] leading-tight pr-6 truncate">
+          <h3 className="line-clamp-2 pr-6 text-[0.93rem] font-semibold leading-snug text-app-text" title={tool.name}>
             {tool.name}
           </h3>
-          <p className="mt-1.5 text-[#86a6be] text-[0.83rem] leading-[1.45] line-clamp-2">
+          <p className="mt-1.5 line-clamp-2 text-[0.81rem] leading-[1.45] text-app-muted">
             {tool.description}
           </p>
 
-          <div className="flex flex-wrap items-center gap-1.5 mt-2.5">
-            {tool.tags.map(tag => (
-              <span key={tag} className={`text-[0.68rem] font-bold px-2 py-0.5 rounded-md ${TAG_STYLES[tag] ?? ''}`}>
-                {tag}
-              </span>
-            ))}
+          <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
+            <span
+              className={`inline-flex items-center gap-1 rounded-md border px-1.5 py-0.5 text-[0.66rem] font-bold ${KIND_BADGE[tool.kind]}`}
+            >
+              <KindIcon size={10} aria-hidden />
+              {KIND_LABELS[tool.kind]}
+            </span>
             {isCLI && (
               <span
-                title="Outil en ligne de commande / Nécessite un terminal"
-                className="flex items-center gap-1 text-[0.68rem] font-bold px-2 py-0.5 rounded-md bg-sky-500/10 text-sky-400 border border-sky-500/20 cursor-help"
+                title="Outil en ligne de commande — nécessite un terminal"
+                className="inline-flex items-center gap-1 rounded-md border border-app-sky/30 bg-app-sky/10 px-1.5 py-0.5 text-[0.66rem] font-bold text-app-sky"
               >
-                <Terminal size={10} />
+                <Terminal size={10} aria-hidden />
                 CLI
+              </span>
+            )}
+            {isPaid && (
+              <span className="inline-flex items-center gap-1 rounded-md border border-app-orange/30 bg-app-orange/10 px-1.5 py-0.5 text-[0.66rem] font-bold text-app-orange">
+                Payant
               </span>
             )}
           </div>
 
-          {/* Source indicator */}
-          <div className="flex items-center gap-1.5 mt-2 text-[#6f90aa] text-[0.72rem] font-medium">
-            {isGitHub ? <Github size={11} className="text-[#a9c7dc]" /> : <Globe size={11} className="text-cyan-400/70" />}
-            <span className="truncate" title={sourceLabel}>{sourceLabel}</span>
-          </div>
+          <p className="mt-2 truncate font-mono text-[0.7rem] text-app-dim" title={domain}>
+            {domain}
+          </p>
         </div>
       </div>
 
       {/* Actions */}
-      <div className="relative z-10 flex gap-2 mt-3">
+      <div className="relative z-20 mt-3 flex gap-2">
         <a
           href={tool.url}
           target="_blank"
-          rel="noreferrer"
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[0.78rem] font-medium bg-cyan-400/12 text-cyan-300 border border-[#12304d] hover:bg-cyan-400/20 hover:border-cyan-400/50 transition-all duration-150"
-          onClick={e => e.stopPropagation()}
+          rel="noreferrer noopener"
+          className="inline-flex items-center gap-1.5 rounded-xl border border-app-border bg-app-accentSoft px-3 py-1.5 text-[0.77rem] font-medium text-app-accent transition-all duration-150 hover:border-app-accent/50 hover:brightness-110"
+          onClick={() => onOpen(tool)}
         >
-          <ExternalLink size={12} />
+          <ExternalLink size={12} aria-hidden />
           Ouvrir
         </a>
         <button
+          type="button"
           onClick={handleCopy}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[0.78rem] font-medium bg-[#0a1930] text-[#d8efff] border border-[#12304d] hover:border-cyan-400/40 hover:text-white transition-all duration-150"
+          className="inline-flex items-center gap-1.5 rounded-xl border border-app-border bg-app-panel2 px-3 py-1.5 text-[0.77rem] font-medium text-app-text transition-all duration-150 hover:border-app-accent/40"
         >
-          {copied ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
+          {copied ? <Check size={12} className="text-app-emerald" aria-hidden /> : <Copy size={12} aria-hidden />}
           {copied ? 'Copié' : 'Copier'}
         </button>
       </div>
-    </div>
+    </article>
   );
 });

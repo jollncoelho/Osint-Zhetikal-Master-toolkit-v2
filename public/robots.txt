@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# L'annuaire est une application d'une seule page : tout est accessible depuis la racine.
+Sitemap: https://zhetikal-osint-toolkit.netlify.app/sitemap.xml

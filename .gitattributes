@@ -1,0 +1,21 @@
+# Normaliser les fins de ligne : LF dans le dépôt, quel que soit l'OS.
+* text=auto eol=lf
+
+# Fichiers binaires — jamais de conversion de fin de ligne.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.webp binary
+*.woff binary
+*.woff2 binary
+*.ttf  binary
+*.pdf  binary
+
+# Fichiers générés : ne pas les compter dans les stats de diff/linguist.
+src/data/toolkit.json        linguist-generated=true
+package-lock.json            linguist-generated=true
+scripts/source/toolkit.raw.json   linguist-generated=true
+scripts/source/tools.legacy.json  linguist-generated=true
+public/og-image.png          linguist-generated=true

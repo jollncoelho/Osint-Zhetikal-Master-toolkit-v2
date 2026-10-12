@@ -1,35 +1,45 @@
-import { useState, useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
+import { useLocalStorage } from './useLocalStorage';
+import { TOOL_BY_URL } from '../data/tools';
 
-const STORAGE_KEY = 'ghostint_favorites';
+const STORAGE_KEY = 'zhetikal.favorites.v2';
+const LEGACY_KEY = 'ghostint_favorites';
 
-function loadFavorites(): Set<string> {
+/**
+ * Gestion des favoris (identifiants d'outils), persistés dans le navigateur.
+ * Migration transparente depuis l'ancien format (liste d'URL → identifiants).
+ */
+function loadInitial(): string[] {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return new Set(JSON.parse(raw));
-  } catch {}
-  return new Set();
-}
-
-function saveFavorites(favs: Set<string>) {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify([...favs]));
-  } catch {}
+    const legacy = window.localStorage.getItem(LEGACY_KEY);
+    if (legacy) {
+      const urls = JSON.parse(legacy) as string[];
+      window.localStorage.removeItem(LEGACY_KEY);
+      if (Array.isArray(urls)) {
+        return urls.map(url => TOOL_BY_URL.get(url)?.id).filter((id): id is string => Boolean(id));
+      }
+    }
+  } catch {
+    /* stockage indisponible : on repart d'une liste vide */
+  }
+  return [];
 }
 
 export function useFavorites() {
-  const [favorites, setFavorites] = useState<Set<string>>(loadFavorites);
+  const [ids, setIds] = useLocalStorage<string[]>(STORAGE_KEY, loadInitial());
 
-  const toggle = useCallback((url: string) => {
-    setFavorites(prev => {
-      const next = new Set(prev);
-      if (next.has(url)) next.delete(url);
-      else next.add(url);
-      saveFavorites(next);
-      return next;
-    });
-  }, []);
+  const favorites = useMemo(() => new Set(ids), [ids]);
 
-  const isFavorite = useCallback((url: string) => favorites.has(url), [favorites]);
+  const toggle = useCallback(
+    (id: string) => {
+      setIds(prev => (prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]));
+    },
+    [setIds]
+  );
 
-  return { favorites, toggle, isFavorite };
+  const clear = useCallback(() => setIds([]), [setIds]);
+
+  const isFavorite = useCallback((id: string) => favorites.has(id), [favorites]);
+
+  return { favorites, ids, toggle, clear, isFavorite };
 }

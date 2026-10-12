@@ -1,39 +1,106 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Primary Meta Tags -->
-    <title>Zhetikal OSINT Master-Toolkit v2 - 470+ Curated OSINT Resources</title>
-    <meta name="title" content="Zhetikal OSINT Master-Toolkit v2 - 470+ Curated OSINT Resources" />
-    <meta name="description" content="An open-source interactive directory indexing 470+ OSINT tools. Filter by category, free tools, and CLI scripts for faster digital investigations." />
-    <meta name="keywords" content="OSINT, cybersecurity, osint tools, directory, threat intelligence, zhetikal, breach search, metadata extraction" />
+    <!-- Applique le thème avant le premier rendu (évite tout flash de couleur) -->
+    <script>
+      (function () {
+        try {
+          var stored = window.localStorage.getItem('zhetikal.theme');
+          var theme =
+            stored === 'light' || stored === 'dark'
+              ? stored
+              : window.matchMedia('(prefers-color-scheme: light)').matches
+                ? 'light'
+                : 'dark';
+          document.documentElement.dataset.theme = theme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'dark';
+        }
+      })();
+    </script>
+
+    <title>Zhetikal OSINT Master-Toolkit v2 — 1 227 outils OSINT classés</title>
+    <meta
+      name="description"
+      content="Annuaire interactif de 1 227 outils OSINT classés en 24 catégories : téléphones, e-mails, usernames, DNS, fuites de données, métadonnées, géolocalisation, réseaux sociaux, IA. Filtres par type, recherche instantanée, favoris exportables."
+    />
+    <meta
+      name="keywords"
+      content="OSINT, cybersécurité, outils osint, annuaire osint, threat intelligence, fuites de données, métadonnées, recherche inversée, renseignement open source, zhetikal"
+    />
     <meta name="author" content="Zhetikal" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#020817" />
 
-    <!-- Open Graph / Facebook / LinkedIn / Reddit -->
+    <!-- Icônes -->
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
     <meta property="og:url" content="https://zhetikal-osint-toolkit.netlify.app/" />
-    <meta property="og:title" content="Zhetikal OSINT Master-Toolkit v2 - 470+ Curated OSINT Resources" />
-    <meta property="og:description" content="An open-source interactive directory indexing 470+ OSINT tools. Filter by category, free tools, and CLI scripts for faster digital investigations." />
     <meta property="og:site_name" content="Zhetikal OSINT Master-Toolkit" />
-    <meta property="og:image" content="https://bolt.new/static/og_default.png" />
+    <meta property="og:title" content="Zhetikal OSINT Master-Toolkit v2 — 1 227 outils OSINT classés" />
+    <meta
+      property="og:description"
+      content="1 227 outils OSINT classés en 24 catégories, avec recherche instantanée, filtres par type de ressource, favoris exportables et thème clair/sombre."
+    />
+    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Zhetikal OSINT Master-Toolkit — annuaire de 1 227 outils OSINT" />
 
-    <!-- Twitter -->
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://zhetikal-osint-toolkit.netlify.app/" />
-    <meta name="twitter:title" content="Zhetikal OSINT Master-Toolkit v2 - 470+ Curated OSINT Resources" />
-    <meta name="twitter:description" content="An open-source interactive directory indexing 470+ OSINT tools. Filter by category, free tools, and CLI scripts for faster digital investigations." />
-    <meta name="twitter:image" content="https://bolt.new/static/og_default.png" />
+    <meta name="twitter:title" content="Zhetikal OSINT Master-Toolkit v2 — 1 227 outils OSINT classés" />
+    <meta
+      name="twitter:description"
+      content="1 227 outils OSINT classés en 24 catégories. Recherche instantanée, filtres, favoris exportables."
+    />
+    <meta name="twitter:image" content="/og-image.png" />
 
-    <!-- Canonical -->
     <link rel="canonical" href="https://zhetikal-osint-toolkit.netlify.app/" />
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
+    <!-- Polices : connexion anticipée pour un premier rendu plus rapide -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://www.google.com" />
+
+    <!-- Données structurées -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Zhetikal OSINT Master-Toolkit v2",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Web",
+        "description": "Annuaire interactif de 1 227 outils OSINT classés en 24 catégories, avec recherche instantanée et filtres par type de ressource.",
+        "url": "https://zhetikal-osint-toolkit.netlify.app/",
+        "inLanguage": "fr",
+        "isAccessibleForFree": true,
+        "author": { "@type": "Person", "name": "Zhétikal" },
+        "keywords": "OSINT, cybersécurité, threat intelligence, renseignement open source"
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <div style="max-width: 40rem; margin: 4rem auto; font-family: system-ui, sans-serif; line-height: 1.6">
+        <h1>Zhetikal OSINT Master-Toolkit v2</h1>
+        <p>
+          Cet annuaire de 1 227 outils OSINT nécessite JavaScript pour la recherche et le filtrage. Merci d'activer
+          JavaScript dans votre navigateur.
+        </p>
+      </div>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
