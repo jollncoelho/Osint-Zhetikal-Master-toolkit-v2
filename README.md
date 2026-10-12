@@ -5,7 +5,15 @@
 
 Interface 100 % statique (aucun backend) — React + TypeScript + Vite + Tailwind.
 
-**Dépôt :** <https://github.com/jollncoelho/Osint-Zhetikal-Master-toolkit-v2>
+[![Site](https://img.shields.io/badge/site-ghostint.query--intel.com-22d3ee?style=flat-square)](https://ghostint.query-intel.com/)
+![Outils](https://img.shields.io/badge/outils-1%20227-38bdf8?style=flat-square)
+![Catégories](https://img.shields.io/badge/cat%C3%A9gories-24-a78bfa?style=flat-square)
+![Stack](https://img.shields.io/badge/React%20%2B%20Vite%20%2B%20Tailwind-0ea5e9?style=flat-square)
+
+**🔗 Site en ligne :** <https://ghostint.query-intel.com/>
+**📦 Dépôt :** <https://github.com/jollncoelho/Osint-Zhetikal-Master-toolkit-v2>
+
+![Aperçu de l'interface — thème sombre (à gauche) et thème clair (à droite)](docs/preview.png)
 
 ---
 
@@ -75,6 +83,7 @@ Usernames · Documents & Data · Fact-check & Vérification
 
 ```
 ├── index.html                  # coquille HTML : SEO, Open Graph, JSON-LD, manifest
+├── docs/preview.png            # aperçu de l'interface (thèmes sombre + clair)
 ├── public/                     # fichiers servis tels quels
 │   ├── logo.svg                # logo (repris d'OSINT Investigator)
 │   ├── favicon.svg             # icône vectorielle
