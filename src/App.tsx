@@ -9,6 +9,7 @@ import {
   FileText,
   RotateCcw,
   History,
+  Home,
   Sun,
   Moon,
   SlidersHorizontal,
@@ -62,6 +63,9 @@ const SORT_LABELS: Record<SortKey, string> = {
   category: 'Catégorie (A → Z)',
   'category-desc': 'Catégorie (Z → A)',
 };
+
+/** Site principal — le bouton « maison » de l'en-tête y renvoie. */
+const MAIN_SITE_URL = 'https://www.query-intel.com';
 
 const CATEGORY_ORDER = new Map(SEARCHABLE_TOOLS.map((tool, index) => [tool.category, index]));
 
@@ -317,6 +321,16 @@ export default function App() {
               </div>
 
               <div className="flex flex-wrap items-center gap-2">
+                <a
+                  href={MAIN_SITE_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="grid h-9 w-9 place-items-center rounded-xl border border-app-border bg-app-panel text-app-muted transition-all hover:border-app-accent/50 hover:bg-app-accentSoft hover:text-app-accent"
+                  aria-label="Retour au site principal — query-intel.com"
+                  title="Retour à query-intel.com"
+                >
+                  <Home size={15} aria-hidden />
+                </a>
                 <button
                   type="button"
                   onClick={toggleTheme}
